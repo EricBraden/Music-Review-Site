@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/layout.css">
+        <link rel="stylesheet" href="./css/styles.css">
+        <title>Prototype Pages for Cleveland Coders' Music Review Site</title>
+    </head>
+    <body>
+        <header>
+            <nav id="nav_menu">
+                <a href="/">Main Page</a>
+                <a href="/allCategories">Categories</a>
+                <a href="/allHashtags">Hashtags</a>
+            </nav>
+            <br>
+            <h1>Cleveland Coders' Music Review Site</h1>
+            <div style="width:777px; text-align:center; font-size:30px; font-weight:bold;" th:text="'Hashtag: ' + ${thisHashtagsName}"></div>
+        </header>
+        <main>
+
+
+            <div class="box-with-rounded-corners" th:each="review:${thisHashtagsReviews}">
+                <h3 th:text="'Album: ' + ${review.albumName}"></h3>
+                <div class="grid-container">
+                    <div class="grid-col1">
+                        <span class="reviewDetailsFormatting" th:utext="
+                        'Artist: ' + ${review.artist} + '<br />' +
+                        'Date of Publication: ' + ${review.dateOfPublication} + '<br />' +
+                        'Publisher: ' + ${review.publisher} + '<br />' +
+                        'Format: ' + ${review.format} + '<br />' +
+                        'Location: ' + ${review.locationPublished} + '<br />'
+                        "></span>
+                        <span class="reviewDetailsFormatting">
+                        Other Websites:
+                        <a th:href="${review.worldCatLink}">WorldCat, </a>
+                        <a th:href="${review.amazonLink}">Amazon</a>
+                        </span>
+                        <br>
+                        <span class="reviewDetailsFormatting">Hashtags: </span><span class="reviewDetailsFormatting" th:each="oneHashtag:${review.hashtags}" th:text="${oneHashtag.name} + ' '">ListOfHashtags</span>
+                    </div>
+                    <div class="grid-col2">
+                        <br>
+                        <form th:action="@{addHashtag}" method="POST">
+                            <label>Add Hashtags: </label><br>
+                            <textarea name="newHashtagsToAdd" cols="25" rows="3"></textarea><br>
+                            <input name="id" th:value="${review.id}" type="hidden">
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <article class="review_article_container">
+                    <h2 class="paddingAndMarginsZero">Review: </h2>
+                    <span th:utext="'&quot;' + ${review.allReviews} + '&quot;'"></span>
+                    <h5 class="indented noBottomPaddingOrMargin">Comments on this review: </h5>
+                    <span th:each="oneComment:${review.comments}" th:utext="${oneComment.comment} + '<br><br>'" class="indented">
+                        list of comments for this album
+                    </span>
+                </article>
+                <form th:action="@{addCommentOnReview}" method="POST">
+                    <label>Comment on this review:</label><br>
+                    <textarea name="newCommentToAdd" cols="104" rows="2"></textarea>
+                    <input name="id" th:value="${review.id}" type="hidden">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+
+            <hr>
+
+            <h2>Hashtags For ALL Reviews:</h2>
+            <span th:each="oneAlbumsHashtags:${allHashtags}">
+                    <a th:text="${oneAlbumsHashtags.name}"
+                       th:href="${oneAlbumsHashtags.id}"
+                    ></a>&nbsp;
+                </span>
+        </main>
+        <footer></footer>
+    </body>
+</html>

@@ -1,0 +1,71 @@
+:root {
+    --wrapper-width: 777px;
+  }
+
+#nav_menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    width: var(--wrapper-width);
+    margin: auto;
+    padding: 2px 26px 2px 26px;
+}
+
+main {
+    width: var(--wrapper-width);
+    margin: auto;
+    padding: 0px;
+    position: relative;
+    left:-26px;
+}
+
+.box-with-rounded-corners{
+    width: var(--wrapper-width);
+    padding: 0px 25px 20px 25px;
+    margin-top: 20px;
+}
+
+h1 {
+    padding-top: 0px;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.indented{
+    position: relative;
+    left: 50px;
+}
+
+.review_article_container{
+    margin: 10px auto;
+    padding: 10px 20px 0px 20px;
+    width: var(--wrapper-width-30px);
+    text-indent: 50px;
+}
+
+.paddingAndMarginsZero{
+    margin: 0px;
+    padding: 0px;
+}
+
+button{
+    position: relative;
+    top: -2px;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 450px auto;
+    position: relative;
+}
+.grid-col1{
+    width: auto;
+}
+.grid-col2{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    text-align: right;
+    vertical-align: bottom;
+}
